@@ -1,5 +1,5 @@
 class Renderer
-    def render()
+    def render
         raise NotImplementedError
     end
 end

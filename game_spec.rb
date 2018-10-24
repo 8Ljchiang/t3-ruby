@@ -34,7 +34,7 @@ RSpec.describe(Game) do
             @game = create_game(args)
         end
         
-        it "it should change the Game state to 'started'", positive: true do
+        it "should change the Game state to 'started'", positive: true do
            @game.set_state("started")
            expect(@game.state).to eq("started")             
         end
@@ -48,7 +48,7 @@ RSpec.describe(Game) do
             @game = create_game(args)
         end
 
-        it "it should change the active_player_index up by 1", positive: true do
+        it "should change the active_player_index up by 1", positive: true do
             @game.set_state("started")
             @game.play_a_position(1)
             expect(@game.active_player_index).to eq(1)
