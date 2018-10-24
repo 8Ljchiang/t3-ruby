@@ -101,7 +101,7 @@ RSpec.describe(Board) do
                 else
                     @board.add_mark("O", i)
                 end
-                expect(@baord.is_position_empty(i)).to be(false)
+                expect(@board.is_position_empty(i)).to be(false)
             end 
         end
 

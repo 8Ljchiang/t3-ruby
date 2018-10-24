@@ -43,7 +43,50 @@ class Board
         return valid_positions
     end
 
-    def _adjust_position_to_index(postion)
+    def is_position_empty(position)
+        if (@data[_adjust_position_to_index(position)] == OPEN_SPACE)
+            return true
+        else
+            return false
+        end
+    end
+
+    def empty_positions
+        empty_positions = Array.new
+        @data.each_with_index do |mark, index|
+            if (mark == ' ')
+                empty_positions.push(_adjust_index_to_position(index))
+            end
+        end
+        return empty_positions
+    end
+
+    def get_marker_positions(marker)
+        marker_positions = Array.new
+        @data.each_with_index do |mark, index|
+            if (mark == marker)
+                marker_positions.push(_adjust_index_to_position(index))
+            end
+        end
+        return marker_positions
+    end
+
+    def add_mark(marker, position)
+        if is_valid_position(position) && is_position_empty(position)
+            index = _adjust_position_to_index(position)
+            @data[index] = marker
+        end
+    end
+
+    def get_position(position)
+        if is_valid_position(position)
+            index = _adjust_position_to_index(position)
+            return @data[index]
+        end
+    end
+
+
+    def _adjust_position_to_index(position)
         return position - OFFSET
     end
 
