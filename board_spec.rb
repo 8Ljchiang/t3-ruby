@@ -33,4 +33,22 @@ RSpec.describe(Board) do
             expect(@board.data).to match_array([" "," "," "," "," "," "," "," "," ",])
         end
     end
+
+    context "When testing Board class position methods" do
+        before(:each) do
+            size = 3
+            @board = create_board({ height: size, width: size })
+        end
+
+        it "should return false when is_valid_position is called for 0 & 10", positive: true do
+            expect(@board.is_valid_position(0)).to be(false)
+            expect(@board.is_valid_position(10)).to be(false)
+        end
+
+        it "should return true when is_valid_position is called for 1-9", positive: true do
+            for i in 1..9 do
+                expect(@board.is_valid_position(i)).to be(true)
+            end
+        end
+    end
 end

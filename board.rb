@@ -1,5 +1,7 @@
 require_relative './constants.rb'
 
+OFFSET = 1
+
 class Board
     def initialize(args={})
         @height = args[:height]
@@ -29,4 +31,15 @@ class Board
         end 
     end
 
+    def is_valid_position(position)
+        return position <= (data.length) && position > 0
+    end
+
+    def _adjust_position_to_index(postion)
+        return position - OFFSET
+    end
+
+    def _adjust_index_to_position(index)
+        return index + OFFSET
+    end
 end
