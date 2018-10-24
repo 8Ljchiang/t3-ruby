@@ -4,8 +4,8 @@ OFFSET = 1
 
 class Board
     def initialize(args={})
-        @height = args[:height]
-        @width = args[:width]
+        @height = args[:height] || 3
+        @width = args[:width] || 3
         @data = args[:data] || reset()
     end
 

@@ -1,6 +1,6 @@
 require_relative './constants.rb'
 require_relative './game_renderer.rb'
-require_relative './board_rendere.rb'
+require_relative './board_renderer.rb'
 
 class View
     def initialize(args={})
@@ -16,11 +16,12 @@ class View
         case game.state
         when GAME_STATE_NEW
             show(@game_renderer.welcome(game))
-        when GAME_STATE_STATED
+        when GAME_STATE_STARTED
             _render_board(game.board)
             show(@game_renderer.render(game))
         when GAME_STATE_END
-            show(@game_renderer.end(game))
+            _render_board(game.board)
+            show(@game_renderer.finale(game))
         when GAME_STATE_CLOSED
             show("The has been quit.")
         else

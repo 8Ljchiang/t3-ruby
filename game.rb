@@ -37,7 +37,7 @@ class Game
     end
 
     def current_player
-        return @players[active_player_index]
+        return @players[@active_player_index]
     end
 
     def players
@@ -49,7 +49,7 @@ class Game
     end
 
     def _cycle_active_player
-        if (@active_player_index < players.length)
+        if (@active_player_index < @players.length - 1)
             @active_player_index += 1
         else 
             @active_player_index = 0
