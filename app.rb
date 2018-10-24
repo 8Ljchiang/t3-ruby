@@ -1,12 +1,17 @@
 require_relative './game.rb'
 require_relative './view.rb'
 require_relative './input_reader.rb'
+require_relative './constants.rb'
 
 class App
     def initialize(args={})
-        @input_reader = args[:input_reader] || InputHandler.new
+        @input_reader = args[:input_reader] || InputHandler.new(IO.new(1))
         @view = args[:view] || View.new
-        @game = nil
+        @game = args[:game] || new_game()
+    end
+
+    def new_game
+        return Game.new({ players: [Player.new("player1", "X"), Player.new("player2", "O")] })
     end
 
     def run
@@ -14,16 +19,16 @@ class App
         game_args = { players: game_players }
         @game = Game.new(game_args)
 
-        while @game.state != "end" 
-            if @game.state == "new"
-                @view.show_welcome(@game)
-            elsif @game.state == "started"
-                @view.show_game(@game)
+        while @game.state != GAME_STATE_END 
+            if @game.state == GAME_STATE_NEW
+                @view.render_game(@game)
+            elsif @game.state == GAME_STATE_STARTED
+                @view.render_game(@game)
                 input = @input_reader.get_input(@game.current_player().name() + " select a position (1-9): ")
                 @game.play_a_position(input)
             end
         end
 
-        @game.show_finale(@game)
+        @view.render_game(@game)
     end
 end
