@@ -35,6 +35,14 @@ class Board
         return position <= (data.length) && position > 0
     end
 
+    def valid_positions
+        valid_positions = []
+        data.each_with_index do |element, index|
+            valid_positions.push(_adjust_index_to_position(index))
+        end
+        return valid_positions
+    end
+
     def _adjust_position_to_index(postion)
         return position - OFFSET
     end

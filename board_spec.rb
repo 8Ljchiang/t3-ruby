@@ -34,7 +34,7 @@ RSpec.describe(Board) do
         end
     end
 
-    context "When testing Board class position methods" do
+    context "When testing Board class is_valid_position method" do
         before(:each) do
             size = 3
             @board = create_board({ height: size, width: size })
@@ -49,6 +49,17 @@ RSpec.describe(Board) do
             for i in 1..9 do
                 expect(@board.is_valid_position(i)).to be(true)
             end
+        end
+    end
+
+    context "When testing Board class 'valid_positions' method" do
+        before(:each) do
+            size = 3
+            @board = create_board({ height: size, width: size })
+        end
+        
+        it "should return an array with values 1-9", positive: true do
+            expect(@board.valid_positions).to contain_exactly(1, 2, 3, 4, 5, 6, 7, 8, 9)
         end
     end
 end
