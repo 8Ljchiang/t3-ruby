@@ -15,23 +15,25 @@ RSpec.describe(GameRenderer) do
         context "When testing GameRenderer 'render' method" do
 
             before(:each) do
-                game_args = { players: [Player.new("Mike", "X"), Player.new("Will", "O")]}
+                player1 = "Mike"
+                player2 = "Will"
+                game_args = { players: [Player.new(player1, "X"), Player.new(player2, "O")], active_player: 0}
                 @game = Game.new(game_args)
                 @renderer = GameRenderer.new
             end
 
             it "should create the game welcome message", positive: true do
-                welcome_string = "welcome"
+                welcome_string = "Welcome to Tic Tac Toe\n\nRules: \n1. Choose a position on the board (1-9)\n2. Match three in a row to win."
                 expect(@renderer.welcome(@game)).to eq(welcome_string)
             end
 
             it "should create the game started message", positive: true do
-                started_string = "game started"
+                started_string = "It is Mike's turn."
                 expect(@renderer.render(@game)).to eq(started_string)
             end
 
             it "should create the game end message", positive: true do
-                end_string = "the game has ended"
+                end_string = "The game has ended."
                 expect(@renderer.finale(@game)).to eq(end_string)
             end
         end
