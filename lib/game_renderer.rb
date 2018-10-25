@@ -6,10 +6,10 @@ class GameRenderer < Renderer
     end
 
     def welcome(game)
-        return "Welcome to Tic Tac Toe\n\nRules: \n1. Choose a position on the board (1-9)\n2. Match three in a row to win."
+        return "Welcome to Tic Tac Toe\n\nRules: \n1. Choose a position on the board (1-9)\n2. Match three in a row to win.\nType 'ready' to begin..."
     end
 
     def finale(game)
-        return "The game has ended."
+        return "The game has ended.\nOptions: 'new', 'end', or 'save'"
     end
 end

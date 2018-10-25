@@ -1,21 +1,28 @@
 require_relative './board.rb'
+require_relative './constants.rb'
 
 class Game
     def initialize(args={})
-        @state = "new"
+        @state = GAME_STATE_NEW
         @players = args[:players]
         @active_player_index = args[:active_player] || _random_player_index
         @board = args[:board] || Board.new
     end
 
+    def reset
+        @state = GAME_STATE_NEW
+        @active_player_index = _random_player_index
+        @board.reset
+    end
+
     def play_a_position(position) 
-        if (@state == "started")
+        if (@state == GAME_STATE_STARTED)
             @board.add_mark(current_player().mark(), position)
             
             _cycle_active_player()
             
             if (@board.empty_positions().length == 0)
-                @state = "end"
+                @state = GAME_STATE_END
             end
         end
     end
