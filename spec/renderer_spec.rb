@@ -1,4 +1,4 @@
-require_relative './renderer.rb'
+require_relative '../lib/renderer.rb'
 require_relative './renderer_interface_spec.rb'
 
 RSpec.describe(Renderer) do

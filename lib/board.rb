@@ -3,26 +3,16 @@ require_relative './constants.rb'
 OFFSET = 1
 
 class Board
+    attr_reader :height, :width, :data
+
     def initialize(args={})
-        @height = args[:height] || 3
-        @width = args[:width] || 3
-        @data = args[:data] || reset()
+        @height = args.fetch(:height, 3)
+        @width = args.fetch(:width, 3)
+        @data = args.fetch(:data, Array.new(9, OPEN_SPACE))
     end
 
     def reset
         @data = Array.new(9, OPEN_SPACE)
-    end
-
-    def height
-        return @height
-    end
-
-    def width
-        return @width 
-    end
-
-    def data
-        return @data
     end
 
     def set_data (data)
@@ -44,11 +34,7 @@ class Board
     end
 
     def is_position_empty(position)
-        if (@data[_adjust_position_to_index(position)] == OPEN_SPACE)
-            return true
-        else
-            return false
-        end
+        return @data[_adjust_position_to_index(position)] == OPEN_SPACE)aaaaa
     end
 
     def empty_positions
@@ -84,7 +70,6 @@ class Board
             return @data[index]
         end
     end
-
 
     def _adjust_position_to_index(position)
         return position - OFFSET

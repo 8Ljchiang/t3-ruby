@@ -1,27 +1,5 @@
 class Parser
     def initialize(args={})
-        # @parsing_table = args[:parsing_table] || {
-        #     new: {
-        #         options: ['ready'],
-        #         ready: _new_ready,
-        #         default: _new_default,
-        #         error: _new_error
-        #     },
-        #     started: {
-        #         options: _started_options,
-        #         default: _started_default,
-        #         error: _started_error
-        #     },
-        #     end: {
-        #         options: ['close', 'new', 'save'],
-        #         close: _end_close,
-        #         new: _end_new,
-        #         save: _end_save,
-        #         default: _end_default,
-        #         error: _end_error
-        #     }
-        # }
-
         @parsing_table = args[:parsing_table] || {
             "new": {
                 options: method(:_new_options),
@@ -88,16 +66,8 @@ class Parser
         return ["ready"]
     end
 
-    def _end_options(game, input)
-        return ["end", "save", "new"]
-    end
-
-    def _started_options(game, input)
-        options = []
-        game.board.empty_positions.each do |position|
-            options.push(position.to_s)
-        end
-        return options
+    def _new_ready(game, input)
+        game.set_state(GAME_STATE_STARTED)
     end
 
     def _new_default(game, input)
@@ -109,12 +79,20 @@ class Parser
         game.play_a_position(position)
     end
 
-    def _end_default(game, input)
-        @parsing_table.dig(game.state.to_sym, input.to_sym).(game)
+    def _started_options(game, input)
+        options = []
+        game.board.empty_positions.each do |position|
+            options.push(position.to_s)
+        end
+        return options
     end
 
-    def _new_ready(game, input)
-        game.set_state(GAME_STATE_STARTED)
+    def _end_default(game, input)
+        @parsing_table.dig(game.state.to_sym, input.to_sym).call(game, input)
+    end
+
+    def _end_options(game, input)
+        return ["end", "save", "new"]
     end
 
     def _end_close(game, input)

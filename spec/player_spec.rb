@@ -1,4 +1,4 @@
-require_relative './player.rb'
+require_relative '../lib/player.rb'
 
 # Testing helper to create a player object
 def create_player(args={})
@@ -16,20 +16,23 @@ RSpec.describe(Player) do
         end
     end
 
-    context "when calling Player class methods" do
-        
+    context "When calling Player class methods" do
         before(:each) do
             player_name = "Sam"
             player_marker = "X"
             @player = create_player({ name: player_name, mark: player_marker})
         end
         
-        it "should return 'Sam' when 'name' method is called", positive: true do
-            expect(@player.name).to eq("Sam")
+        context "#name" do
+            it "should return 'Sam' when 'name' method is called", positive: true do
+                expect(@player.name).to eq("Sam")
+            end
         end
 
-        it "should return 'X' when 'mark' method is called", positive: true do
-            expect(@player.mark).to eq("X")
+        context "#mark" do
+            it "should return 'X' when 'mark' method is called", positive: true do
+                expect(@player.mark).to eq("X")
+            end
         end
     end
 end

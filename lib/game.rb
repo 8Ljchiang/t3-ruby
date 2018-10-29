@@ -2,17 +2,31 @@ require_relative './board.rb'
 require_relative './constants.rb'
 
 class Game
+    attr_reader :board, :state, :players, :active_player_index
+
     def initialize(args={})
         @state = GAME_STATE_NEW
-        @players = args[:players]
-        @active_player_index = args[:active_player] || _random_player_index
-        @board = args[:board] || Board.new
+        @players = args.fetch(:players)
+        @active_player_index = args.fetch(:active_player, _random_player_index)
+        @board = args.fetch(board, Board.new)
     end
 
     def reset
         @state = GAME_STATE_NEW
         @active_player_index = _random_player_index
         @board.reset
+    end
+
+    def set_state(state)
+        @state = state
+    end
+
+    def current_player
+        return @players[@active_player_index]
+    end
+    
+    def _random_player_index
+        return rand(@players.length)
     end
 
     def play_a_position(position) 
@@ -25,34 +39,6 @@ class Game
                 @state = GAME_STATE_END
             end
         end
-    end
-
-    def active_player_index
-        return @active_player_index
-    end
-
-    def board
-        return @board
-    end
-
-    def state
-        return @state
-    end
-    
-    def set_state(state)
-        @state = state
-    end
-
-    def current_player
-        return @players[@active_player_index]
-    end
-
-    def players
-        return @players
-    end
-    
-    def _random_player_index
-        return rand(@players.length)
     end
 
     def _cycle_active_player

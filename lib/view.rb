@@ -13,6 +13,7 @@ class View
     end
 
     def render_game(game)
+        show("Tic Tac Toe")
         case game.state
         when GAME_STATE_NEW
             show(@game_renderer.welcome(game))
@@ -27,6 +28,7 @@ class View
         else
             show("Error: Unknown Game state.")
         end
+        
     end
 
     def _render_board(board)

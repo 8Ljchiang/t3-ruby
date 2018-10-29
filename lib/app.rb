@@ -22,26 +22,10 @@ class App
         game_args = { players: game_players }
         @game = Game.new(game_args)
 
-        # while @game.state != GAME_STATE_CLOSED 
-        #     if @game.state == GAME_STATE_NEW
-        #         @view.render_game(@game)
-        #         input = @input_reader.get_input("Type 'ready' to begin...")
-        #         if (input == 'ready')
-        #             @game.set_state(GAME_STATE_STARTED)
-        #         end
-        #     elsif @game.state == GAME_STATE_STARTED
-        #         @view.render_game(@game)
-        #         input = @input_reader.get_input(@game.current_player().name() + " select a position (1-9): ")
-
-        #         @game.play_a_position(input.to_i)
-        #     else 
-        #         @view.render_game(@game)
-        #     end
-        # end
-
         while @game.state != GAME_STATE_CLOSED 
             @view.render_game(@game)
             input = @input_reader.get_input("#{@game.current_player.name}: ")
+            system "clear"
             @parser.parse(input, @game)
         end
     end

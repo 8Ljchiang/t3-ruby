@@ -1,5 +1,5 @@
-require_relative './player.rb'
-require_relative './game.rb'
+require_relative '../lib/player.rb'
+require_relative '../lib/game.rb'
 
 RSpec.describe(Game) do
 
@@ -8,7 +8,7 @@ RSpec.describe(Game) do
         game = Game.new(args)
     end
 
-    context "When a Game is created " do
+    context "When creating a Game class" do
 
         before(:each) do
             plyrs = [Player.new("Tom", "X"), Player.new("John", "O")]
@@ -17,7 +17,7 @@ RSpec.describe(Game) do
             @game = create_game(args)
         end
 
-        it "it should be instantiated with default properties", positive: true do
+        it "should be instantiated with default properties", positive: true do
             expect(@game).to_not be(nil)
             expect(@game.players.length).to eq(2)
             expect(@game.state).to eq("new")
@@ -52,6 +52,22 @@ RSpec.describe(Game) do
             @game.set_state("started")
             @game.play_a_position(1)
             expect(@game.active_player_index).to eq(1)
+        end
+    end
+
+    context "When a Game board is full" do
+        before(:each) do
+            plyrs = [Player.new("Tom", "X"), Player.new("John", "O")]
+            initial_player = 0
+            args = { players: plyrs, active_player: initial_player }
+            @game = create_game(args)
+        end
+
+        it "should change the Game state to 'end'", positive: true do
+            for i in 1..9 do
+                @game.play_a_position(i)
+            end
+            expect(@game.state).to eq('end')
         end
     end
 end
