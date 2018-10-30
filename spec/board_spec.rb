@@ -72,6 +72,8 @@ RSpec.describe(Board) do
 
         it "should set mark on board and baord data should show marks at positions: 1, 5, 7", position: true do
             @board.add_mark("X", 1)
+            @board.add_mark("X", 1)
+            @board.add_mark("X", 1)
             @board.add_mark("X", 5)
             @board.add_mark("X", 7)
             expect(@board.data).to match_array(["X"," "," "," ","X"," ","X"," "," "])

@@ -34,7 +34,7 @@ class Board
     end
 
     def is_position_empty(position)
-        return @data[_adjust_position_to_index(position)] == OPEN_SPACE)
+        return @data[_adjust_position_to_index(position)] == OPEN_SPACE
     end
 
     def empty_positions
