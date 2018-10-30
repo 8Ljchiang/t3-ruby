@@ -7,7 +7,7 @@ class BoardRenderer < Renderer
         line_storage = []
         index = 0 
         while index < board.data.length
-            if ((adjust_index_to_position(i)%board.width) == 0)
+            if ((adjust_index_to_position(index)%board.width) == 0)
                 fill_string = make_space_buffer(4) + board.data[index] + make_space_buffer(4)
                 line_storage.push(fill_string + "\n")
                 pre_result_storage.push(create_n_nonline_rows(board, 1) + line_storage.join("|") + create_n_nonline_rows(board, 1))
