@@ -8,7 +8,7 @@ class Game
         @state = GAME_STATE_NEW
         @players = args.fetch(:players)
         @active_player_index = args.fetch(:active_player, random_player_index)
-        @board = args.fetch(board, Board.new)
+        @board = args.fetch(:board, Board.new)
     end
 
     def reset

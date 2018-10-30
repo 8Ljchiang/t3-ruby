@@ -7,10 +7,10 @@ require_relative './parser.rb'
 
 class App
     def initialize(args={})
-        @game = args[:game] || new_game
-        @view = args[:view] || View.new
-        @parser = args[:parser] || Parser.new
-        @input_reader = args[:input_reader] || InputHandler.new(IO.new(1))
+        @game = args.fetch(:game, new_game)
+        @view = args.fetch(:view, View.new)
+        @parser = args.fetch(:parser, Parser.new)
+        @input_reader = args.fetch(:input_reader, InputHandler.new(IO.new(1)))
     end
 
     def new_game

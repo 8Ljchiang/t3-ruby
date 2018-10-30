@@ -4,8 +4,8 @@ require_relative './board_renderer.rb'
 
 class View
     def initialize(args={})
-        @game_renderer = args[:game_renderer] || GameRenderer.new
-        @board_renderer = args[:board_renderer] || BoardRenderer.new
+        @game_renderer = args.fetch(:game_renderer, GameRenderer.new)
+        @board_renderer = args.fecth(:board_renderer, BoardRenderer.new)
     end
 
     def show(text)
