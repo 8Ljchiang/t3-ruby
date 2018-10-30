@@ -10,6 +10,6 @@ class GameRenderer < Renderer
     end
 
     def finale(game)
-        return "The game has ended.\nOptions: 'new', 'end', or 'save'"
+        return "The game has ended.\nOptions: 'new', 'quit'"
     end
 end

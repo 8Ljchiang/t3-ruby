@@ -14,11 +14,11 @@ class Parser
             },
             "end": {
                 options: method(:end_options),
-                close: method(:end_close),
+                quit: method(:end_close),
                 new: method(:end_new),
                 save: method(:end_save),
                 default: method(:end_default),
-                error: method(:_end_error)
+                error: method(:end_error)
             }
         }
     end
@@ -93,7 +93,7 @@ class Parser
     end
 
     def end_options(game, input)
-        return ["end", "save", "new"]
+        return ["new", "quit"]
     end
 
     def end_close(game, input)
