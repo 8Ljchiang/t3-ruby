@@ -18,10 +18,10 @@ class View
         when GAME_STATE_NEW
             show(@game_renderer.welcome(game))
         when GAME_STATE_STARTED
-            _render_board(game.board)
+            render_board(game.board)
             show(@game_renderer.render(game))
         when GAME_STATE_END
-            _render_board(game.board)
+            render_board(game.board)
             show(@game_renderer.finale(game))
         when GAME_STATE_CLOSED
             show("The has been quit.")
@@ -31,7 +31,7 @@ class View
         
     end
 
-    def _render_board(board)
+    def render_board(board)
         show(@board_renderer.render(board))
     end
 end

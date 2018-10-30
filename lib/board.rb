@@ -28,20 +28,20 @@ class Board
     def valid_positions
         valid_positions = []
         data.each_with_index do |element, index|
-            valid_positions.push(_adjust_index_to_position(index))
+            valid_positions.push(adjust_index_to_position(index))
         end
         return valid_positions
     end
 
     def is_position_empty(position)
-        return @data[_adjust_position_to_index(position)] == OPEN_SPACE
+        return @data[adjust_position_to_index(position)] == OPEN_SPACE
     end
 
     def empty_positions
         empty_positions = Array.new
         @data.each_with_index do |mark, index|
             if (mark == ' ')
-                empty_positions.push(_adjust_index_to_position(index))
+                empty_positions.push(adjust_index_to_position(index))
             end
         end
         return empty_positions
@@ -51,7 +51,7 @@ class Board
         marker_positions = Array.new
         @data.each_with_index do |mark, index|
             if (mark == marker)
-                marker_positions.push(_adjust_index_to_position(index))
+                marker_positions.push(adjust_index_to_position(index))
             end
         end
         return marker_positions
@@ -59,23 +59,24 @@ class Board
 
     def add_mark(marker, position)
         if is_valid_position(position) && is_position_empty(position)
-            index = _adjust_position_to_index(position)
+            index = adjust_position_to_index(position)
             @data[index] = marker
         end
     end
 
     def get_position(position)
         if is_valid_position(position)
-            index = _adjust_position_to_index(position)
+            index = adjust_position_to_index(position)
             return @data[index]
         end
     end
 
-    def _adjust_position_to_index(position)
+    private
+    def adjust_position_to_index(position)
         return position - OFFSET
     end
 
-    def _adjust_index_to_position(index)
+    def adjust_index_to_position(index)
         return index + OFFSET
     end
 end

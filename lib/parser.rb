@@ -2,22 +2,22 @@ class Parser
     def initialize(args={})
         @parsing_table = args[:parsing_table] || {
             "new": {
-                options: method(:_new_options),
-                ready: method(:_new_ready),
-                default: method(:_new_default),
-                error: method(:_new_error)
+                options: method(:new_options),
+                ready: method(:new_ready),
+                default: method(:new_default),
+                error: method(:new_error)
             },
             "started": {
-                options: method(:_started_options),
-                default: method(:_started_default),
-                error: method(:_started_error)
+                options: method(:started_options),
+                default: method(:started_default),
+                error: method(:started_error)
             },
             "end": {
-                options: method(:_end_options),
-                close: method(:_end_close),
-                new: method(:_end_new),
-                save: method(:_end_save),
-                default: method(:_end_default),
+                options: method(:end_options),
+                close: method(:end_close),
+                new: method(:end_new),
+                save: method(:end_save),
+                default: method(:end_default),
                 error: method(:_end_error)
             }
         }
@@ -26,23 +26,23 @@ class Parser
     def parse(input, game)
         case game.state
         when GAME_STATE_NEW
-            if (_is_valid_input(input, game))
+            if (is_valid_input(input, game))
                 ref_cb = @parsing_table.dig(game.state.to_sym, :default)
-                _handle(input, game, ref_cb)
+                handle(input, game, ref_cb)
             else
                 @parsing_table.dig(game.state.to_sym, :error).call(game, input)
             end
         when GAME_STATE_STARTED
-            if (_is_valid_input(input, game))
+            if (is_valid_input(input, game))
                 ref_cb = @parsing_table.dig(game.state.to_sym, :default)
-                _handle(input, game, ref_cb)
+                handle(input, game, ref_cb)
             else
                 @parsing_table.dig(game.state.to_sym, :error).call(game, input)
             end
         when GAME_STATE_END
-            if (_is_valid_input(input, game))
+            if (is_valid_input(input, game))
                 ref_cb = @parsing_table.dig(game.state.to_sym, :default)
-                _handle(input, game, ref_cb)
+                handle(input, game, ref_cb)
             else
                 @parsing_table.dig(game.state.to_sym, :error).call(game, input)
             end
@@ -53,33 +53,34 @@ class Parser
         end
     end
 
-    def _handle(input, game, cb)
+    private
+    def handle(input, game, cb)
         cb.call(game, input)
     end
 
-    def _is_valid_input(input, game)
+    def is_valid_input(input, game)
         options = @parsing_table.dig(game.state.to_sym, :options)
         return options.call(game, input).include?(input)
     end
 
-    def _new_options(game, input)
+    def new_options(game, input)
         return ["ready"]
     end
 
-    def _new_ready(game, input)
+    def new_ready(game, input)
         game.set_state(GAME_STATE_STARTED)
     end
 
-    def _new_default(game, input)
+    def new_default(game, input)
         @parsing_table.dig(game.state.to_sym, input.to_sym).call(game, input)
     end
 
-    def _started_default(game, input)
+    def started_default(game, input)
         position = input.to_i
         game.play_a_position(position)
     end
 
-    def _started_options(game, input)
+    def started_options(game, input)
         options = []
         game.board.empty_positions.each do |position|
             options.push(position.to_s)
@@ -87,37 +88,37 @@ class Parser
         return options
     end
 
-    def _end_default(game, input)
+    def end_default(game, input)
         @parsing_table.dig(game.state.to_sym, input.to_sym).call(game, input)
     end
 
-    def _end_options(game, input)
+    def end_options(game, input)
         return ["end", "save", "new"]
     end
 
-    def _end_close(game, input)
+    def end_close(game, input)
         game.set_state(GAME_STATE_CLOSED)
     end
 
-    def _end_new(game, input)
+    def end_new(game, input)
         game.reset
     end
 
-    def _new_error(game, input)
+    def new_error(game, input)
         puts "Input not recognized as a valid option."
         puts "Options: " + @parsing_table.dig(game.state.to_sym, :options).call(game, input).join(", ")
     end
 
-    def _started_error(game, input)
+    def started_error(game, input)
         puts "Input not recognized as a valid option."
         puts "Options: " + @parsing_table.dig(game.state.to_sym, :options).call(game, input).join(", ")
     end
 
-    def _end_error(game, input)
+    def end_error(game, input)
         puts "Input not recognized as a valid option."
         puts "Options: " + @parsing_table.dig(game.state.to_sym, :options).call(game, input).join(", ")
     end
 
-    def _end_save(game, input)
+    def end_save(game, input)
     end
 end

@@ -7,13 +7,13 @@ class Game
     def initialize(args={})
         @state = GAME_STATE_NEW
         @players = args.fetch(:players)
-        @active_player_index = args.fetch(:active_player, _random_player_index)
+        @active_player_index = args.fetch(:active_player, random_player_index)
         @board = args.fetch(board, Board.new)
     end
 
     def reset
         @state = GAME_STATE_NEW
-        @active_player_index = _random_player_index
+        @active_player_index = random_player_index
         @board.reset
     end
 
@@ -24,16 +24,12 @@ class Game
     def current_player
         return @players[@active_player_index]
     end
-    
-    def _random_player_index
-        return rand(@players.length)
-    end
 
     def play_a_position(position) 
         if (@state == GAME_STATE_STARTED)
             @board.add_mark(current_player().mark(), position)
             
-            _cycle_active_player()
+            cycle_active_player()
             
             if (@board.empty_positions().length == 0)
                 @state = GAME_STATE_END
@@ -41,7 +37,12 @@ class Game
         end
     end
 
-    def _cycle_active_player
+    private 
+    def random_player_index
+        return rand(@players.length)
+    end
+
+    def cycle_active_player
         if (@active_player_index < @players.length - 1)
             @active_player_index += 1
         else 
