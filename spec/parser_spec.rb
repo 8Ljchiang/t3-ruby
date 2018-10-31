@@ -58,7 +58,7 @@ RSpec.describe(Parser) do
         it "should take invalid input and call the error handler", positiive: true do
             input = "invalid_input"
             @parser.parse(input, @game)
-            expect(@parser.handlers).to have_recieved(:options)
+            expect(@parser.handlers).to have_received(:options)
             expect(@parser.handlers).to have_received(:error)
         end
     end
