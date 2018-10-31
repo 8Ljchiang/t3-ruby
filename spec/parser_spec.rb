@@ -1,11 +1,4 @@
-require_relative '../parser.rb'
-
-
-parserHandlers = {
-    default: method(:default),
-    error: method(:error),
-    options: method(:options)
-}
+require_relative '../lib/parser.rb'
 
 def default(args={})
 
@@ -19,7 +12,13 @@ def options(args={})
 
 end
 
-def create_parser()
+parserHandlers = {
+    default: default,
+    error: error,
+    options: options
+}
+
+def create_parser(handlers)
     parser = Parser.new({ handlers: handlers })
     return parser
 end
@@ -27,7 +26,7 @@ end
 RSpec.describe(Parser) do
     context "When creating a Parser class" do 
         it "should return an instantiated Parser object", positive: true do
-            parser = create_parser()
+            parser = create_parser(parserHandlers)
             expect(parser).to_not be(nil)
         end
     end
