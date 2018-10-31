@@ -30,7 +30,7 @@ RSpec.describe(Parser) do
         mockHandlers = double("handlers")
         allow(mockHandlers).to receive(:error)
         allow(mockHandlers).to receive(:default)
-        allow(mockHandlers).to receive(:options).and_return(["valid_input"])
+        allow(mockHandlers).to receive(:options).and_return(["valid_input"]) #.and_return("valid_input")
         return mockHandlers
     end
 
@@ -45,18 +45,19 @@ RSpec.describe(Parser) do
         before(:each) do
             mockHandlers = create_mock_parser_handlers()
             @parser = create_parser(mockHandlers)
+            @game = double("game")
         end
 
         it "should take valid input and call the default handler", positive: true do
             input = "valid_input"
-            @parser.parse(input)
+            @parser.parse(input, @game)
             expect(@parser.handlers).to have_received(:options)
             expect(@parser.handlers).to have_received(:default)
         end
         
         it "should take invalid input and call the error handler", positiive: true do
             input = "invalid_input"
-            @parser.parse(input)
+            @parser.parse(input, @game)
             expect(@parser.handlers).to have_recieved(:options)
             expect(@parser.handlers).to have_received(:error)
         end
