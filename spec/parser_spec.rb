@@ -26,13 +26,13 @@ end
 
 RSpec.describe(Parser) do
 
-    def create_parser_handlers_mock() {
-        mockHandlers = {}
-        allow(mockHandlers).to_receive(:error)
-        allow(mockHandlers).to_receive(:default)
-        allow(mockHandlers).to_receive(:options).and_return(["valid_input"])
+    def create_mock_parser_handlers
+        mockHandlers = double("handlers")
+        allow(mockHandlers).to receive(:error)
+        allow(mockHandlers).to receive(:default)
+        allow(mockHandlers).to receive(:options).and_return(["valid_input"])
         return mockHandlers
-    }
+    end
 
     context "When creating a Parser class" do 
         it "should return an instantiated Parser object", positive: true do
@@ -43,7 +43,7 @@ RSpec.describe(Parser) do
 
     context "#parse" do
         before(:each) do
-            mockHandlers = create_moack_parser_handlers()
+            mockHandlers = create_mock_parser_handlers()
             @parser = create_parser(mockHandlers)
         end
 
