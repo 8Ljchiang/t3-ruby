@@ -16,19 +16,23 @@ class View
         show("Tic Tac Toe")
         case game.state
         when GAME_STATE_NEW
-            show(@game_renderer.render(game))
+            render_game(game)
         when GAME_STATE_STARTED
             render_board(game.board)
-            show(@game_renderer.render(game))
+            render_game(game)
         when GAME_STATE_END
             render_board(game.board)
-            show(@game_renderer.render(game))
+            render_game(game)
         when GAME_STATE_CLOSED
             show("The has been quit.")
         else
             show("Error: Unknown Game state.")
         end
-        
+    end
+
+    private
+    def render_game(game)
+        show(@game_renderer.render(game))
     end
 
     def render_board(board)
