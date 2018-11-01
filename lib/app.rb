@@ -3,13 +3,13 @@ require_relative './view.rb'
 require_relative './player.rb'
 require_relative './input_handler.rb'
 require_relative './constants.rb'
-require_relative './parser.rb'
+require_relative './delegator.rb'
 
 class App
     def initialize(args={})
         @game = args.fetch(:game, new_game)
         @view = args.fetch(:view, View.new)
-        @parser = args.fetch(:parser, Parser.new)
+        @delegator = args.fetch(:delegator)
         @input_reader = args.fetch(:input_reader, InputHandler.new(IO.new(1)))
     end
 
@@ -23,10 +23,10 @@ class App
         @game = Game.new(game_args)
 
         while @game.state != GAME_STATE_CLOSED 
-            @view.render_game(@game)
+            @view.render(@game)
             input = @input_reader.get_input("#{@game.current_player.name}: ")
-            system "clear"
-            @parser.parse(input, @game)
+            # system "clear"
+            @delegator.delegate(input, @game)
         end
     end
 end
