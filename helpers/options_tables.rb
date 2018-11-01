@@ -1,9 +1,7 @@
-
-
 new_options = lambda { |args| return ["ready"]}
-new_default = lambda { |args| return "" }
-new_ready = lambda { |args| return "" }
-new_error = lambda { |args| return "" }
+new_default = lambda { |args| new_options_table[args.input].call(args) }
+new_ready = lambda { |args| args[:game][:state] = "started" }
+new_error = lambda { |args| return "error" }
  
 new_options_table = {
     options: new_options,

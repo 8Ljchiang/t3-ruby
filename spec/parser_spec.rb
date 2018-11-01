@@ -1,65 +1,62 @@
 require_relative '../lib/parser.rb'
+require_relative '../helpers/options_tables.rb'
 
-def default(args={})
-
-end
-
-def error(args={})
-
-end
-
-def options(args={})
-
-end
-
-parserHandlers = {
-    default: default,
-    error: error,
-    options: options
+new_options = lambda { |args| return ["ready"]}
+new_default = lambda { |args| new_options_table[args.input].call(args) }
+new_ready = lambda { |args| puts args[:game][:started] } #= "started" }
+new_error = lambda { |args| return "error" }
+ 
+new_options_table = {
+    options: new_options,
+    default: new_default,
+    ready: new_ready,
+    error: new_error
 }
 
-
-def create_parser(handlers)
-    parser = Parser.new({ handlers: handlers })
-    return parser
-end
-
 RSpec.describe(Parser) do
-
-    def create_mock_parser_handlers
-        mockHandlers = double("handlers")
-        allow(mockHandlers).to receive(:error)
-        allow(mockHandlers).to receive(:default)
-        allow(mockHandlers).to receive(:options).and_return(["valid_input"]) #.and_return("valid_input")
-        return mockHandlers
+    def create_parser(options_table)
+        return Parser.new({ options_table: options_table })
     end
 
-    context "When creating a Parser class" do 
-        it "should return an instantiated Parser object", positive: true do
-            parser = create_parser(parserHandlers)
-            expect(parser).to_not be(nil)
+    def create_mock_game
+        mock_game = instance_double('Game', :state => "new")
+        return mock_game
+    end
+
+    context "When creating Parser" do
+        before(:each) do
+            @parser = create_parser(new_options_table)
+        end
+
+        it "should intialize a Handler object", positive: true do
+            expect(@parser).to_not be(nil)
         end
     end
-
+    
     context "#parse" do
         before(:each) do
-            mockHandlers = create_mock_parser_handlers()
-            @parser = create_parser(mockHandlers)
-            @game = double("game")
+            @parser = create_parser(new_options_table)
         end
 
-        it "should take valid input and call the default handler", positive: true do
-            input = "valid_input"
-            @parser.parse(input, @game)
-            expect(@parser.handlers).to have_received(:options)
-            expect(@parser.handlers).to have_received(:default)
+        it "should respond to #parse" do
+            expect(@parser).to respond_to(:parse)
         end
-        
-        it "should take invalid input and call the error handler", positiive: true do
-            input = "invalid_input"
-            @parser.parse(input, @game)
-            expect(@parser.handlers).to have_received(:options)
-            expect(@parser.handlers).to have_received(:error)
+    end
+
+    context "#parse when initialized with new_options_table" do
+        before(:each) do
+            @parser = create_parser(new_options_table)
+        end
+
+        it "should return options as an array" do
+            game = create_mock_game 
+            expect(@parser.options_table[:options].call({ input: "ready", game: game })).to contain_exactly("ready")
+        end
+
+        it "should change game state to 'started' from 'new'" do
+            game = create_mock_game
+            @parser.parse("ready", game)
+            expect(game.state).to eq("started")
         end
     end
 end
