@@ -15,12 +15,8 @@ RSpec.describe(Handler) do
             expect(@handler).to_not be(nil)
         end
         
-        it "should respond to #default" do
-            expect(@handler).to respond_to(:default)
-        end
-
-        it "should respond to #error" do
-            expect(@handler).to respond_to(:error)
+        it "should respond to #handle" do
+            expect(@handler).to respond_to(:handle)
         end
     end
 end

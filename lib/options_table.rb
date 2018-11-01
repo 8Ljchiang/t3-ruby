@@ -3,6 +3,6 @@ class OptionsTable
     end
 
     def add_method(method_name, &block)
-        define_method(method_name, &block)
+        define_singleton_method(method_name, &block)
     end
 end
