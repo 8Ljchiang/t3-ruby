@@ -22,6 +22,6 @@ class Delegator
 
     private
     def contains_parser(input, game)
-        return @parsers.keys.include? game.state
+        return @parsers.keys.include? game[:state]
     end
 end
