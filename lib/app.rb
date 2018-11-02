@@ -3,7 +3,6 @@ require_relative './view.rb'
 require_relative './player.rb'
 require_relative './input_handler.rb'
 require_relative './constants.rb'
-require_relative './delegator.rb'
 
 class App
     def initialize(args={})
@@ -25,7 +24,7 @@ class App
         while @game.state != GAME_STATE_CLOSED 
             @view.render(@game)
             input = @input_reader.get_input("#{@game.current_player.name}: ")
-            # system "clear"
+            system "clear"
             @delegator.delegate(input, @game)
         end
     end

@@ -44,7 +44,6 @@ parsersHash = {
     end: endParser
 }
 
-
 delegator = Delegator.new(parsersHash)
 
 t3 = App.new({delegator: delegator})

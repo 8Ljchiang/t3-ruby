@@ -6,7 +6,7 @@ class Delegator
 
     def delegate(input, game)
         if contains_parser(input, game)
-            parser = @parsers[game.state]
+            parser = @parsers[game.state.to_sym]
             parser.parse(input, game)
         end
     end

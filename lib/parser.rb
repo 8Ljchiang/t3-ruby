@@ -8,7 +8,9 @@ class Parser
     def parse(input, game)
         if is_valid_option(input, game)
             if contains_parser(input, game)
-                @options_table[input.to_sym].call({ input: input, game: game })
+                func = @options_table[input.to_sym] #.call({ input: input, game: game })
+                puts func({ input: input, game: game })
+                func.call({input: input, game: game})
             else
                 @options_table[:default].call({ input: input, game: game })
             end
