@@ -12,7 +12,7 @@ class View
         puts text
     end
 
-    def render_game(game)
+    def render(game)
         show("Tic Tac Toe")
         case game.state
         when GAME_STATE_NEW
