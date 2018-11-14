@@ -9,6 +9,7 @@ class App
         @game = args.fetch(:game, new_game)
         @view = args.fetch(:view, View.new)
         @delegator = args.fetch(:delegator)
+        @handler_table = args.fetch(:handler_table)
         @input_reader = args.fetch(:input_reader, InputHandler.new(IO.new(1)))
     end
 
@@ -25,7 +26,13 @@ class App
             @view.render(@game)
             input = @input_reader.get_input("#{@game.current_player.name}: ")
             system "clear"
-            @delegator.delegate(input, @game)
+            parse(input, @game)
+            # @delegator.delegate(input, @game)
         end
+    end
+
+    def parse(input, game)
+        handler = @handler_table[game.state.to_sym]
+        handler.handle(input, game)
     end
 end
