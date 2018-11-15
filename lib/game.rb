@@ -10,7 +10,7 @@ class Game
         @players = args.fetch(:players)
         @active_player_index = args.fetch(:active_player, random_player_index)
         @board = args.fetch(:board, Board.new)
-        @win_info = ""
+        @win_info = "The game has ended with no winner."
     end
 
     def reset

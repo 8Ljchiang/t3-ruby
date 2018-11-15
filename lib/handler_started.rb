@@ -32,7 +32,8 @@ class StartedHandler < Handler
         current_mark = game.current_player().mark
         game.play_a_position(position)
         if @checker.contains_matching_pattern(game.board.get_marker_positions(current_mark))
-            game.win_info = "#{game.current_player().name} (#{game.current_player().mark}) is the winner."
+            win_positions = @checker.get_matching_pattern(game.board.get_marker_positions(current_mark))
+            game.win_info = "#{game.current_player().name} (#{game.current_player().mark}: #{win_positions.join(", ")}) is the winner."
             game.set_state(GAME_STATE_END)
         else
             game.cycle_active_player()
