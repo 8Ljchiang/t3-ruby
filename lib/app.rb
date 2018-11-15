@@ -27,7 +27,6 @@ class App
             input = @input_reader.get_input("#{@game.current_player.name}: ")
             system "clear"
             parse(input, @game)
-            # @delegator.delegate(input, @game)
         end
     end
 
