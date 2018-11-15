@@ -2,6 +2,11 @@ require_relative './handler.rb'
 require_relative './pattern_checker.rb'
 
 class StartedHandler < Handler
+
+    def initialize(args={})
+        @checker = args.fetch(:pattern_checker)
+    end
+
     def handle(input, game)
         if is_valid_option(input, game)
             default(input, game)
@@ -23,24 +28,14 @@ class StartedHandler < Handler
     end
 
     def default(input, game)
-
-        default_win_patterns = [
-            "1,5,9",
-            "3,5,7",
-            "1,2,3",
-            "4,5,6",
-            "7,8,9",
-            "1,4,7",
-            "2,5,8",
-            "3,6,9"
-        ]
-        
-        pattern_checker = PatternChecker.new({ patterns: default_win_patterns })
         position = input.to_i
         current_mark = game.current_player().mark
         game.play_a_position(position)
-        if pattern_checker.contains_matching_pattern(game.board.get_marker_positions(current_mark))
-            game.set_state("end")
+        if @checker.contains_matching_pattern(game.board.get_marker_positions(current_mark))
+            game.win_info = "#{game.current_player().name} (#{game.current_player().mark}) is the winner."
+            game.set_state(GAME_STATE_END)
+        else
+            game.cycle_active_player()
         end
     end
 end

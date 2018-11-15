@@ -1,6 +1,6 @@
 require_relative './handler.rb'
 
-GAME_STATE_STARTED = "started"
+# GAME_STATE_STARTED = "started"
 
 class NewHandler < Handler
     # def initialize(args = {})
