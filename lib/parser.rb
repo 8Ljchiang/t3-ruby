@@ -8,7 +8,7 @@ class Parser
     def parse(input, game)
         if is_valid_option(input, game)
             if contains_parser(input, game)
-                func = @options_table[input.to_sym] #.call({ input: input, game: game })
+                func = @options_table[input.to_sym]
                 puts func({ input: input, game: game })
                 func.call({input: input, game: game})
             else
@@ -19,18 +19,6 @@ class Parser
         end
     end
 
-    # def add_option_parser(option_name, handler)
-    #     if !contains_parser(option_name)
-    #         @options_table[name] = handler
-    #     end
-    # end
-
-    # def remove_option_parser(option_name)
-    #     if contains_parser(option_name)
-    #         @options_table.delete(option_name)
-    #     end
-    # end
-    
     private
     def contains_parser(key, game)
         handlerNames = @options_table.keys.select{|handler| return !(["error", "default", "options"].include? handler) } 
