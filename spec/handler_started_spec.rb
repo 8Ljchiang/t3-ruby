@@ -5,7 +5,6 @@ RSpec.describe(StartedHandler) do
         game = spy()
         game_board = instance_double("Board", :empty_positions => [1, 2, 3, 4, 5, 6, 7, 8, 9])
         game.play_a_position
-        # game.board = game_board
         allow(game).to receive(:state) { "started" }
         allow(game).to receive(:board) { game_board }
         return game

@@ -19,8 +19,7 @@ RSpec.describe(Parser) do
     end
 
     def create_mock_game
-        mock_game = instance_double('Game', :state => "new")
-        return mock_game
+        instance_double('Game', :state => "new")
     end
 
     context "When creating Parser" do
