@@ -25,7 +25,7 @@ end_handler = EndHandler.new
 handler_table = {
   "new": new_handler,
   "started": started_handler,
-  "end": end_handler
+  "end": end_handler,
 }
 
 t3 = App.new(delegator: nil, handler_table: handler_table)
