@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 class Renderer
   def render
     raise NotImplementedError

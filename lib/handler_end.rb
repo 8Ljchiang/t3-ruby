@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 require_relative './handler.rb'
 
 class EndHandler < Handler

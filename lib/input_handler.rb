@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 class InputHandler
   def initialize(io)
     @io = io

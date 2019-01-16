@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 class InputDelegator
     def initialize(args={})
         @parsing_table = args[:parsing_table] || {

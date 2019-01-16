@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 require_relative './constants.rb'
 require_relative './game_renderer.rb'
 require_relative './board_renderer.rb'

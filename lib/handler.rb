@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 class Handler
   def options(_input, _game)
     raise NotImplementedError

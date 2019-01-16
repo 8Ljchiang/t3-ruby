@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 require_relative './handler.rb'
 require_relative './pattern_checker.rb'
 

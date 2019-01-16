@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 require_relative './renderer.rb'
 
 class GameRenderer < Renderer

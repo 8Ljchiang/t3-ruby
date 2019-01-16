@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 require_relative './game.rb'
 require_relative './view.rb'
 require_relative './player.rb'

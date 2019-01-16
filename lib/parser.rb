@@ -1,3 +1,5 @@
+# TODO: DELETE
+
 class Parser
   attr_reader :options_table
 
