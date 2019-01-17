@@ -6,6 +6,8 @@ GAME_STATE_NEW = 'new'.freeze
 GAME_STATE_STARTED = 'started'.freeze
 GAME_STATE_END = 'end'.freeze
 GAME_STATE_CLOSED = 'closed'.freeze
+GAME_STATE_DRAW = 'draw'.freeze
+GAME_STATE_WINNER = 'winner'.freeze
 
 MARKER_1 = 'X'.freeze
 MARKER_2 = 'O'.freeze
