@@ -29,6 +29,7 @@ total_positions = tictactoe.board.width * tictactoe.board.height
   play_round(tictactoe, move, tictactoe_pattern_checker) if is_valid_move
 end
 
+# Show end game information
 br = BoardRenderer.new
 puts ' >> Each loop finished'
 puts "Final game state: #{tictactoe.game_status}"
