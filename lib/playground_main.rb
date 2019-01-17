@@ -3,7 +3,7 @@ require_relative './constants.rb'
 require_relative './game.rb'
 require_relative './pattern_checker.rb'
 require_relative './player.rb'
-require_relative './t3_engine_functions.rb'
+require_relative './t3_helper_functions.rb'
 
 # Initialize players
 player1 = Player.new(DEFAULT_P1, MARKER_1)
