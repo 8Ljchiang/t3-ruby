@@ -3,13 +3,12 @@ require_relative './constants.rb'
 def play_round(game, position_to_play, pattern_checker)
   current_game_status = determine_game_status(game, pattern_checker)
   game.set_game_status(current_game_status)
-  puts "Game Status: #{current_game_status}"
   case current_game_status
   when GAME_STATE_STARTED
     move(game, position_to_play)
-  when 'draw'
+  when GAME_STATE_DRAW
     
-  when 'winner'
+  when GAME_STATE_WINNER
     set_game_winning_info(game, pattern_checker)
   else
 
@@ -49,13 +48,13 @@ end
 
 def determine_game_status(game, pattern_checker)
   game_status = if contains_pattern(game.board, MARKER_1, pattern_checker)
-                  'winner'
+                  GAME_STATE_WINNER
                 elsif contains_pattern(game.board, MARKER_2, pattern_checker)
-                  'winner'
+                  GAME_STATE_WINNER
                 elsif game.board.empty_positions.empty?
-                  'draw'
+                  GAME_STATE_DRAW
                 else
-                  'started'
+                  GAME_STATE_STARTED
           end
   game_status
 end
