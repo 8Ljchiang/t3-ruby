@@ -28,7 +28,7 @@ total_positions = tictactoe.board.width * tictactoe.board.height
   puts " >> playing #{position}"
   move = parse_move_input(position.to_s)
   is_valid_move = is_move_valid(tictactoe, move)
-  play_round(tictactoe, move, tictactoe_pattern_checker) if is_valid_move
+  play_round(tictactoe, move, tictactoe_pattern_checker, false) if is_valid_move
 end
 
 # Show end game information
