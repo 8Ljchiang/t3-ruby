@@ -1,7 +1,8 @@
 require_relative './constants.rb'
 require_relative './t3_move_gen_utils.rb'
+require_relative './t3_input_utils.rb'
 
-def process_game_iteration(process_args)
+def process_t3_iteration(process_args)
   input = process_args.fetch(:input)
   game = process_args.fetch(:game)
   pattern_checker = process_args.fetch(:pattern_checker)
@@ -10,7 +11,9 @@ def process_game_iteration(process_args)
   game.set_game_status(current_game_status)
   case current_game_status
   when GAME_STATE_STARTED
-    play_round(game, input, with_ai)
+    move = parse_move_input(input.to_s)
+    is_valid_move = is_move_valid(game, move)
+    play_round(game, input, with_ai) if is_valid_move
   when GAME_STATE_DRAW
   when GAME_STATE_WINNER
     set_game_winning_info(game, pattern_checker)
@@ -18,13 +21,13 @@ def process_game_iteration(process_args)
 end
 
 def play_round(game, position_to_play, with_ai = true)
-    if with_ai
-      move(game, position_to_play)
-      ai_move = generate_random_move(game.board)
-      move(game, ai_move)
-    elsif
-      move(game, position_to_play)
-    end
+  if with_ai
+    move(game, position_to_play)
+    ai_move = generate_random_move(game.board)
+    move(game, ai_move)
+  elsif
+    move(game, position_to_play)
+  end
 end
 
 def is_move_valid(game, move)

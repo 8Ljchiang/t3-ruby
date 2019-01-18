@@ -26,9 +26,13 @@ tictactoe_pattern_checker = PatternChecker.new(patterns: winning_patterns)
 total_positions = tictactoe.board.width * tictactoe.board.height
 (1..total_positions).each do |position|
   puts " >> playing #{position}"
-  move = parse_move_input(position.to_s)
-  is_valid_move = is_move_valid(tictactoe, move)
-  play_round(tictactoe, move, tictactoe_pattern_checker, false) if is_valid_move
+  process_args = {
+    input: position,
+    game: tictactoe,
+    pattern_checker: tictactoe_pattern_checker,
+    with_ai: false,
+  }
+  process_t3_iteration(process_args)
 end
 
 # Show end game information
