@@ -5,7 +5,7 @@ require_relative './t3_input_utils.rb'
 module T3Engine
   module GameUtils
     def self.process_iteration(process_args)
-      input = process_args.fetch(:input)
+      position = process_args.fetch(:position)
       game = process_args.fetch(:game)
       pattern_checker = process_args.fetch(:pattern_checker)
       with_ai = process_args.fetch(:with_ai)
@@ -13,9 +13,7 @@ module T3Engine
       game.set_game_status(current_game_status)
       case current_game_status
       when GAME_STATE_STARTED
-        move = parse_move_input(input.to_s)
-        is_valid_move = is_move_valid(game, move)
-        play_round(game, input, pattern_checker, with_ai) if is_valid_move
+        play_round(game, position, pattern_checker, with_ai)
       when GAME_STATE_DRAW
       when GAME_STATE_WINNER
         set_game_winning_info(game, pattern_checker)

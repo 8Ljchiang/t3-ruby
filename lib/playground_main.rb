@@ -26,13 +26,19 @@ tictactoe_pattern_checker = PatternChecker.new(patterns: winning_patterns)
 total_positions = tictactoe.board.width * tictactoe.board.height
 (1..total_positions).each do |position|
   puts " >> playing #{position}"
-  process_args = {
-    input: position,
-    game: tictactoe,
-    pattern_checker: tictactoe_pattern_checker,
-    with_ai: true
-  }
-  T3Engine::GameUtils.process_iteration(process_args)
+  move_position = T3Engine::InputUtils.parse_move_input(position)
+  is_valid_move = T3Engine::GameUtils.is_move_valid(tictactoe, move_position)
+
+  if is_valid_move
+    process_args = {
+      position: move_position,
+      game: tictactoe,
+      pattern_checker: tictactoe_pattern_checker,
+      with_ai: true
+    }
+    T3Engine::GameUtils.process_iteration(process_args)
+  end
+
   if tictactoe.game_status != GAME_STATE_STARTED
     break
   end
