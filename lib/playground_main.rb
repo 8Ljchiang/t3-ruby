@@ -30,9 +30,12 @@ total_positions = tictactoe.board.width * tictactoe.board.height
     input: position,
     game: tictactoe,
     pattern_checker: tictactoe_pattern_checker,
-    with_ai: false,
+    with_ai: true
   }
-  process_t3_iteration(process_args)
+  T3Engine::GameUtils.process_iteration(process_args)
+  if tictactoe.game_status != GAME_STATE_STARTED
+    break
+  end
 end
 
 # Show end game information
