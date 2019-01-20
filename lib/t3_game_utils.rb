@@ -25,7 +25,7 @@ module T3Engine
         move(game, position_to_play)
         current_game_status = determine_game_status(game, pattern_checker)
         if current_game_status == GAME_STATE_STARTED
-          ai_move = generate_random_move(game.board)
+          ai_move = T3Engine::MoveGenerationUtils.generate_random_move(game.board)
           move(game, ai_move)
         end
       elsif
