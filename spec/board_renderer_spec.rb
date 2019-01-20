@@ -1,7 +1,7 @@
 require_relative '../lib/board.rb'
 require_relative '../lib/board_renderer.rb'
 require_relative './renderer_interface_spec.rb'
-require_relative '.renderer_subclass_interface_spec.rb'
+require_relative './renderer_subclass_interface_spec.rb'
 
 RSpec.describe(BoardRenderer) do
     context "When implementing a BoardRenderer" do

@@ -19,6 +19,7 @@ tictactoe.set_game_status('started')
 
 # Initialize pattern checking
 winning_patterns = T3Engine::PatternGenerationUtils.generate_winning_patterns(tictactoe.board)
+puts winning_patterns
 # puts winning_patterns
 tictactoe_pattern_checker = PatternChecker.new(patterns: winning_patterns)
 
