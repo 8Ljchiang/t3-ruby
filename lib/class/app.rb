@@ -1,16 +1,13 @@
-# TODO: DELETE
-
 require_relative './game.rb'
 require_relative './view.rb'
 require_relative './player.rb'
 require_relative './input_handler.rb'
-require_relative './constants.rb'
+require_relative '../constants/constants.rb'
 
 class App
   def initialize(args = {})
     @game = args.fetch(:game, new_game)
     @view = args.fetch(:view, View.new)
-    @delegator = args.fetch(:delegator)
     @handler_table = args.fetch(:handler_table)
     @input_reader = args.fetch(:input_reader, InputHandler.new(IO.new(1)))
   end

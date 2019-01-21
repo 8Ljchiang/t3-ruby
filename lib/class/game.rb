@@ -1,5 +1,5 @@
 require_relative './board.rb'
-require_relative './constants.rb'
+require_relative '../constants/constants.rb'
 
 class Game
   attr_reader :board, :game_status, :players, :active_player_index, :win_info

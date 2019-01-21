@@ -1,4 +1,4 @@
-require_relative './constants.rb'
+require_relative '../constants/constants.rb'
 require_relative './t3_move_gen_utils.rb'
 require_relative './t3_input_utils.rb'
 

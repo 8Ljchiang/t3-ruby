@@ -1,11 +1,11 @@
-require_relative './board_renderer.rb'
-require_relative './constants.rb'
-require_relative './game.rb'
-require_relative './pattern_checker.rb'
-require_relative './player.rb'
-require_relative './t3_game_utils.rb'
-require_relative './t3_pattern_utils.rb'
-require_relative './t3_input_utils.rb'
+require_relative './class/board_renderer.rb'
+require_relative './constants/constants.rb'
+require_relative './class/game.rb'
+require_relative './class/pattern_checker.rb'
+require_relative './class/player.rb'
+require_relative './utils/t3_game_utils.rb'
+require_relative './utils/t3_pattern_utils.rb'
+require_relative './utils/t3_input_utils.rb'
 
 # Initialize players
 player1 = Player.new(DEFAULT_P1, MARKER_1)
@@ -19,7 +19,7 @@ tictactoe.set_game_status('started')
 
 # Initialize pattern checking
 winning_patterns = T3Engine::PatternGenerationUtils.generate_winning_patterns(tictactoe.board)
-puts winning_patterns
+
 # puts winning_patterns
 tictactoe_pattern_checker = PatternChecker.new(patterns: winning_patterns)
 
