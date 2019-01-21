@@ -1,5 +1,5 @@
-require_relative '../lib/board.rb'
-require_relative '../lib/pattern_checker.rb'
+require_relative '../lib/class/board.rb'
+require_relative '../lib/class/pattern_checker.rb'
 
 default_win_patterns = [
     "1,5,9",

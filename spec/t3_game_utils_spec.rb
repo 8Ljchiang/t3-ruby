@@ -1,5 +1,5 @@
-require_relative '../lib/constants.rb'
-require_relative '../lib/t3_game_utils.rb'
+require_relative '../lib/constants/constants.rb'
+require_relative '../lib/utils/t3_game_utils.rb'
 
 RSpec.describe T3Engine::GameUtils do
   context 'When process_iteration is called with a valid position without ai' do
@@ -8,14 +8,14 @@ RSpec.describe T3Engine::GameUtils do
       player1 = Player.new(DEFAULT_P1, MARKER_1)
       player2 = Player.new(DEFAULT_P2, MARKER_2)
 
-      game_args = { players: [player1, player2] }
+      game_args = { players: [player1, player2], active_player: 0 }
 
       # Initialize Game
       @tictactoe = Game.new(game_args)
       @tictactoe.set_game_status('started')
 
       # Initialize pattern checking
-      winning_patterns = T3Engine::PatternGenerationUtils.generate_winning_patterns(tictactoe.board)
+      winning_patterns = T3Engine::PatternGenerationUtils.generate_winning_patterns(@tictactoe.board)
       # puts winning_patterns
       @tictactoe_pattern_checker = PatternChecker.new(patterns: winning_patterns)
     end
@@ -31,9 +31,9 @@ RSpec.describe T3Engine::GameUtils do
       }
       T3Engine::GameUtils.process_iteration(process_args)
 
-      expect(@game.board.empty_positions.length).to eq(expected_empty_positions)
-      expect(@game.board.is_position_empty(move_position)).to be(false)
-      expect(@game.board.get_position(move_position)).to eq(MARKER_1)
+      expect(@tictactoe.board.empty_positions.length).to eq(expected_empty_positions)
+      expect(@tictactoe.board.is_position_empty(move_position)).to be(false)
+      expect(@tictactoe.board.get_position(move_position)).to eq(MARKER_1)
     end
   end
 
@@ -43,14 +43,14 @@ RSpec.describe T3Engine::GameUtils do
       player1 = Player.new(DEFAULT_P1, MARKER_1)
       player2 = Player.new(DEFAULT_P2, MARKER_2)
 
-      game_args = { players: [player1, player2] }
+      game_args = { players: [player1, player2], active_player: 0 }
 
       # Initialize Game
       @tictactoe = Game.new(game_args)
       @tictactoe.set_game_status('started')
 
       # Initialize pattern checking
-      winning_patterns = T3Engine::PatternGenerationUtils.generate_winning_patterns(tictactoe.board)
+      winning_patterns = T3Engine::PatternGenerationUtils.generate_winning_patterns(@tictactoe.board)
       # puts winning_patterns
       @tictactoe_pattern_checker = PatternChecker.new(patterns: winning_patterns)
     end
@@ -66,9 +66,9 @@ RSpec.describe T3Engine::GameUtils do
       }
       T3Engine::GameUtils.process_iteration(process_args)
 
-      expect(@game.board.empty_positions.length).to eq(expected_empty_positions)
-      expect(@game.board.is_position_empty(move_position)).to be(false)
-      expect(@game.board.get_position(move_position)).to eq(MARKER_1)
+      expect(@tictactoe.board.empty_positions.length).to eq(expected_empty_positions)
+      expect(@tictactoe.board.is_position_empty(move_position)).to be(false)
+      expect(@tictactoe.board.get_position(move_position)).to eq(MARKER_1)
     end
   end
 end

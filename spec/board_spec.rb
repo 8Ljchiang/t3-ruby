@@ -1,4 +1,4 @@
-require_relative '../lib/board.rb'
+require_relative '../lib/class/board.rb'
 
 RSpec.describe(Board) do 
 

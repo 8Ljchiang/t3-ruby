@@ -10,7 +10,7 @@ class Game
     @players = args.fetch(:players)
     @active_player_index = args.fetch(:active_player, random_player_index)
     @board = args.fetch(:board, Board.new)
-    @win_info = 'The game has ended with no winner.'
+    @win_info = GAME_NO_WIN
   end
 
   def reset
@@ -29,12 +29,18 @@ class Game
 
   def play_a_position(position)
     if @game_status == GAME_STATE_STARTED
-      @board.add_mark(current_player.mark, position)
+      mark_position(current_player.mark, position)
 
       if @board.empty_positions.empty?
-        @win_info = 'The game is a draw.'
+        @win_info = GAME_DRAW
         @game_status = GAME_STATE_END
       end
+    end
+  end
+
+  def mark_position(mark, position)
+    if @board.is_position_empty(position)
+        @board.add_mark(mark, position)
     end
   end
 

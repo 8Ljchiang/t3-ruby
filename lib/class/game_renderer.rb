@@ -15,10 +15,8 @@ class GameRenderer < Renderer
     end
   end
 
-  private
-
   def welcome(_game)
-    "Welcome to Tic Tac Toe built in Ruby\n\nRules: \n1. Choose a position on the board (1-9)\n2. Match three in a row to win.\nType 'ready' to begin..."
+    GAME_WELCOME
   end
 
   def finale(game)

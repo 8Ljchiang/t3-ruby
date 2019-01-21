@@ -1,4 +1,4 @@
-require_relative '../lib/handler_end.rb'
+require_relative '../lib/class/handler_end.rb'
 
 RSpec.describe(EndHandler) do
     def create_mock_game()

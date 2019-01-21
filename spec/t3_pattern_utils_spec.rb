@@ -1,11 +1,11 @@
-require_relative '../lib/board.rb'
-require_relative '../lib/t3_pattern_utils.rb'
+require_relative '../lib/class/board.rb'
+require_relative '../lib/utils/t3_pattern_utils.rb'
 
-RSpec.describe T3Engine::PatternUtils do
+RSpec.describe T3Engine::PatternGenerationUtils do
   context 'When calling generate_winning_patterns with size 3 board' do
     it 'should return all possible winning patterns' do
       size = 3
-      board = new Board(height: size, width: size)
+      board = Board.new(height: size, width: size)
       expected_array = [
         '1,2,3',
         '4,5,6',

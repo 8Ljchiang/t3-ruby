@@ -1,4 +1,4 @@
-require_relative '../lib/t3_input_utils.rb'
+require_relative '../lib/utils/t3_input_utils.rb'
 
 RSpec.describe T3Engine::InputUtils do
   context 'When calling parse_input with an int' do
@@ -6,7 +6,7 @@ RSpec.describe T3Engine::InputUtils do
       input = 1
       expected = input
 
-      result = T3Engine::InputUtils.parse_input(input)
+      result = T3Engine::InputUtils.parse_move_input(input)
 
       expect(result).to eq(expected)
     end
@@ -17,7 +17,7 @@ RSpec.describe T3Engine::InputUtils do
       input = '1'
       expected = 1
 
-      result = T3Engine::InputUtils.parse_input(input)
+      result = T3Engine::InputUtils.parse_move_input(input)
 
       expect(result).to eq(expected)
     end
@@ -28,7 +28,7 @@ RSpec.describe T3Engine::InputUtils do
       input = 'a'
       expected = nil
 
-      result = T3Engine::InputUtils.parse_input(input)
+      result = T3Engine::InputUtils.parse_move_input(input)
 
       expect(result).to eq(expected)
     end

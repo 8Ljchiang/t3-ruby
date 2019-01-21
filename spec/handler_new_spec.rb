@@ -1,9 +1,9 @@
-require_relative '../lib/handler_new.rb'
+require_relative '../lib/class/handler_new.rb'
 
 RSpec.describe(NewHandler) do
     def create_mock_game()
         game = spy()
-        game.set_state
+        game.set_game_status
         allow(game).to receive(:state) { "new" }
         return game
     end
@@ -18,7 +18,7 @@ RSpec.describe(NewHandler) do
             game = create_mock_game()
             new_handler = create_new_handler()
             new_handler.handle(input, game)
-            expect(game).to have_received(:set_state).with("started")
+            expect(game).to have_received(:set_game_status).with(GAME_STATE_STARTED)
         end
     end
 end

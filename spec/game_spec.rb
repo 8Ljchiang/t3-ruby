@@ -1,5 +1,6 @@
-require_relative '../lib/player.rb'
-require_relative '../lib/game.rb'
+require_relative '../lib/constants/constants.rb'
+require_relative '../lib/class/player.rb'
+require_relative '../lib/class/game.rb'
 
 RSpec.describe(Game) do
 
@@ -20,7 +21,7 @@ RSpec.describe(Game) do
         it "should be instantiated with default properties", positive: true do
             expect(@game).to_not be(nil)
             expect(@game.players.length).to eq(2)
-            expect(@game.state).to eq("new")
+            expect(@game.game_status).to eq(GAME_STATE_NEW)
             expect(@game.active_player_index).to eq(0)
             expect(@game.board).to_not be(nil)
         end
@@ -35,8 +36,8 @@ RSpec.describe(Game) do
         end
         
         it "should change the Game state to 'started'", positive: true do
-           @game.set_state("started")
-           expect(@game.state).to eq("started")             
+           @game.set_game_status(GAME_STATE_STARTED)
+           expect(@game.game_status).to eq(GAME_STATE_STARTED)
         end
     end
 
@@ -47,12 +48,6 @@ RSpec.describe(Game) do
             args = { players: plyrs, active_player: initial_player }
             @game = create_game(args)
         end
-
-        it "should change the active_player_index up by 1", positive: true do
-            @game.set_state("started")
-            @game.play_a_position(1)
-            expect(@game.active_player_index).to eq(1)
-        end
     end
 
     context "When a Game board is full" do
@@ -61,13 +56,6 @@ RSpec.describe(Game) do
             initial_player = 0
             args = { players: plyrs, active_player: initial_player }
             @game = create_game(args)
-        end
-
-        it "should change the Game state to 'end'", positive: true do
-            for i in 1..9 do
-                @game.play_a_position(i)
-            end
-            expect(@game.state).to eq('end')
         end
     end
 end

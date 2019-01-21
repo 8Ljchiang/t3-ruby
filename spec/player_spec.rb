@@ -1,4 +1,4 @@
-require_relative '../lib/player.rb'
+require_relative '../lib/class/player.rb'
 
 # Testing helper to create a player object
 def create_player(args={})
