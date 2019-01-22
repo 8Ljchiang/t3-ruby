@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 't3'
+Main.start
