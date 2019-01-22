@@ -1,8 +1,8 @@
 require 'class/app'
-require 'class/handler_end.rb'
-require 'class/handler_new.rb'
-require 'class/handler_started.rb'
-require 'utils/t3_pattern_utils.rb'
+require 'class/handler_end'
+require 'class/handler_new'
+require 'class/handler_started'
+require 'utils/t3_pattern_utils'
 
 module Main
   def self.start
